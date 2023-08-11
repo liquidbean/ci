@@ -1,0 +1,21 @@
+name: CI/CD Workflow
+
+on:
+  repository_dispatch:
+    types: [trigger-ci]
+
+jobs:
+  ci_cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code from Repo A
+        uses: actions/checkout@v2
+        with:
+          repository: liquidbean/forwork  # Replace with Repo A owner and name
+          ref: ${{ github.event.client_payload.commit_sha }}
+
+      # Add your CI/CD steps here, using the checked out code from Repo A
+      - name: Build and Deploy
+        run: |
+          echo "done"
